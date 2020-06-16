@@ -11,15 +11,14 @@ class API():
         endpoint = 'stock-price/'
 
         header = {
-            'Authorization': 'Token 20f85bf98b7904f5b93e73bd469ef25fbafbef8b',
+            'Authorization': 'Token 391a0c42c6866cd8fe8eafa504e554c229738221',
         }
 
         params = {
-            'stock': 1,
+            'stock': ticker_symbol,
             'date': str(self._date),
             'opening_price': opening_price,
             'predicted_closing_price': prediction_value
         }
 
-        response = requests.post(url=os.path.join(self._host, endpoint), data=params, headers=header)
-        print(response.content)
+        return requests.post(url=os.path.join(self._host, endpoint), data=params, headers=header)
