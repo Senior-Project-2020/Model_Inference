@@ -10,7 +10,7 @@ class StockCollectionTests(TestCase):
     def test_collection_dataframe_value_exitsts(self):
         dataframe = self.collection.get_dataframe()
         assert dataframe is not None
-        assert dataframe.shape == (19, 13)
+        assert dataframe.shape == (20, 13)
 
     def test_collection_dataframe_has_correct_featues(self):
         dataframe = self.collection.get_dataframe()
@@ -24,7 +24,7 @@ class StockCollectionTests(TestCase):
 class ModelTests(TestCase):
     def setUp(self):
         super().setUp()
-        self.model = Model("../function/models/Model.h5", "../function/models/scaler.pkl")
+        self.model = Model("function/models/Model.h5", "function/models/scaler.pkl")
     
     def test_predict_tomorrow(self):
         prediction = self.model.predict_tomorrow('MSFT')
