@@ -20,6 +20,7 @@ class StockCollectionTests(TestCase):
             'Change in Volume'
         ]
 
+
 class ModelTests(TestCase):
     def setUp(self):
         super().setUp()
