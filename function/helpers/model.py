@@ -1,7 +1,18 @@
 import tensorflow as tf
+from pickle import load
+from function.helpers.stock import StockCollection
 
 class Model():
     "Class to represent a tensorflow model"
 
-    def init(self):
-        pass
+    def __init__(self, model_file, scaler_file):
+        self._model = tf.keras.models.load_model(model_file)
+        self._scaler = load(open(scaler_file, 'rb'))
+        
+    def predict_tomorrow(self, symbol):
+        collection = StockCollection(symbol)
+        data = collection.get_dataframe()
+        data = self._scaler.transform(data)
+
+        prediction = self._model.predict(data)
+        return prediction[-1]
