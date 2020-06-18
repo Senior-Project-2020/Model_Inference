@@ -1,28 +1,20 @@
 import json
-import boto3
-from function.helpers.api import API
+from helpers.api import API
+from helpers.model import Model
 import pandas as pd
 import os
 
 def main():
-    session = boto3.session.Session()
-    client = session.client(
-        service_name='secretsmanager',
-        region_name='us-east-1'
-    )
-    api_key = ''
+    # api_key = os.environ['API_KEY']
 
-    try:
-        api_key = client.get_secret_value(
-            SecretId='API_key'
-        )
-    except Exception:
-        pass
-    
-    return {
-        'statusCode': 200,
-        'body': api_key
-    }
+    companies = pd.read_json('models/companies.json')
+    print(companies)
+    model = Model(model_file='models/Model.h5', scaler_file='models/scaler.pkl')
+
+    for company in companies.loc[:, 'Symbol']:
+        print(f"Tomorrow's prediction for {company} is: {model.predict_tomorrow(company)}")
+
+    return
 
 if __name__ == '__main__':
     main()

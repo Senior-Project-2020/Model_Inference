@@ -1,6 +1,6 @@
 import tensorflow as tf
 from pickle import load
-from function.helpers.stock import StockCollection
+from helpers.stock import StockCollection
 
 class Model():
     "Class to represent a tensorflow model"
