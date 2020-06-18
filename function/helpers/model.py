@@ -16,3 +16,9 @@ class Model():
 
         prediction = self._model.predict(data)
         return prediction[-1]
+
+    def get_next_opening(self, symbol):
+        collection = StockCollection(symbol)
+        data = collection.get_dataframe()
+        print(data)
+        return data.iloc[-1, 5]
