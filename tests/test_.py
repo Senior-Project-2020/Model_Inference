@@ -10,7 +10,7 @@ class StockCollectionTests(TestCase):
     def test_collection_dataframe_value_exitsts(self):
         dataframe = self.collection.get_dataframe()
         assert dataframe is not None
-        assert dataframe.shape == (20, 13)
+        assert dataframe.shape[1] == 13
 
     def test_collection_dataframe_has_correct_featues(self):
         dataframe = self.collection.get_dataframe()
