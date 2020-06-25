@@ -1,6 +1,6 @@
 from unittest import TestCase
-from function.helpers.stock import StockCollection
-from function.helpers.model import Model
+from helpers.model import Model
+from helpers.stock import StockCollection
 
 class StockCollectionTests(TestCase):
     def setUp(self):
@@ -24,7 +24,7 @@ class StockCollectionTests(TestCase):
 class ModelTests(TestCase):
     def setUp(self):
         super().setUp()
-        self.model = Model("function/models/Model.h5", "function/models/scaler.pkl")
+        self.model = Model("models/Model.h5", "models/scaler.pkl")
     
     def test_predict_tomorrow(self):
         prediction = self.model.predict_tomorrow('MSFT')
