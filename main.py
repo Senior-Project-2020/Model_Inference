@@ -1,5 +1,6 @@
 from helpers.api import API
 from helpers.model import Model
+from helpers.stock import StockCollection
 import pandas as pd
 
 def main():
@@ -10,13 +11,14 @@ def main():
 
     for company in companies.loc[:, 'Symbol']:
         prediction = model.predict_tomorrow(company)
-        opening = 0 # Insert tomorrow opening here
 
-        response = api.submit_prediction(company, opening, prediction)
-        if response.status_code in [200, 201]:
-            print("Creation Successful")
-        else:
-            print("Unsuccessful")
+        stock = StockCollection(company)
+        high, low, open_price, close_price, volume = stock.get_yesterday_data()
+        
+        update_response = api.update_previous_day(company, high, low, open_price, close_price, volume)
+        create_response = api.submit_prediction(company, prediction)
+        
+        print(f'Stock: {company} Update reponse: {update_response.status_code} Create response: {create_response.status_code}')
 
     return
 

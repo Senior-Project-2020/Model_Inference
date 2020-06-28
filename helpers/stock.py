@@ -4,7 +4,6 @@ import time
 
 class StockCollection:
     def __init__(self, symbol):
-        print(symbol)
         self._ticker = yf.Ticker(symbol)
 
     def _remove_null_rows(self, data):
@@ -42,3 +41,20 @@ class StockCollection:
         dataframe.loc[:, 'Change in Volume'] = dataframe.loc[:, 'Volume'] - dataframe.loc[:, 'Volume'].shift(1)
 
         return self._remove_null_rows(dataframe).drop(columns=['Date'])
+
+    def get_yesterday_data(self):
+        while True:
+            try:
+                history = self._ticker.history()
+                break
+            except Exception as e:
+                print(e)
+                time.sleep(0.5)
+
+        dataframe = pd.DataFrame(history)
+        open_price = dataframe.iloc[-2, 0]
+        high = dataframe.iloc[-2, 1]
+        low = dataframe.iloc[-2, 2]
+        close_price = dataframe.iloc[-2, 3]
+        volume = dataframe.iloc[-2, 4]
+        return high, low, open_price, close_price, volume
