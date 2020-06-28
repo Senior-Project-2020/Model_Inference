@@ -1,8 +1,10 @@
 import yfinance as yf
 import pandas as pd
+import time
 
 class StockCollection:
     def __init__(self, symbol):
+        print(symbol)
         self._ticker = yf.Ticker(symbol)
 
     def _remove_null_rows(self, data):
@@ -20,7 +22,15 @@ class StockCollection:
         return data.drop(null_rows).reset_index(drop=True)
 
     def get_dataframe(self):
-        dataframe = pd.DataFrame(self._ticker.history()).drop(columns=['Stock Splits', 'Dividends']).reset_index()
+        while True:
+            try:
+                history = self._ticker.history()
+                break
+            except Exception as e:
+                print(e)
+                time.sleep(0.5)
+
+        dataframe = pd.DataFrame(history).drop(columns=['Stock Splits', 'Dividends']).reset_index()
 
         dataframe.loc[:, 'Year'] = pd.DatetimeIndex(dataframe['Date']).year
         dataframe.loc[:, 'Month'] = pd.DatetimeIndex(dataframe['Date']).month

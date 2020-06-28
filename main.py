@@ -12,8 +12,11 @@ def main():
         prediction = model.predict_tomorrow(company)
         opening = 0 # Insert tomorrow opening here
 
-        api.submit_prediction(company, opening, prediction)
-
+        response = api.submit_prediction(company, opening, prediction)
+        if response.status_code in [200, 201]:
+            print("Creation Successful")
+        else:
+            print("Unsuccessful")
 
     return
 

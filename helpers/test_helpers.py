@@ -28,4 +28,4 @@ class ModelTests(TestCase):
     
     def test_predict_tomorrow(self):
         prediction = self.model.predict_tomorrow('MSFT')
-        assert prediction.shape == (1,)
+        assert type(prediction) == float
