@@ -4,7 +4,7 @@ from datetime import date
 
 class API():
     def __init__(self):
-        self._host = 'http://localhost:8000/api/v1/' #update when deployed
+        self._host = 'http://54.198.60.36/api/v1/'
         self._date = date.today()
 
     def submit_prediction(self, ticker_symbol, opening_price, prediction_value):
