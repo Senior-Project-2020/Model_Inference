@@ -35,9 +35,9 @@ class API():
             yesterday_id = self._price_list[
                 (self._price_list.stock == ticker_symbol) & \
                 (self._price_list.date == str(self._date - timedelta(days=1)))
-            ]
+            ].loc[0, 'id']
         except Exception:
-            return        
+            yesterday_id = -1
 
         endpoint = f'stock-price/{yesterday_id}'
         
