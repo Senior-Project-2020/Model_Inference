@@ -16,9 +16,9 @@ def main():
         high, low, open_price, close_price, volume = stock.get_yesterday_data()
         
         update_response = api.update_previous_day(company, high, low, open_price, close_price, volume)
-        create_response = api.submit_prediction(company, prediction)
+        #create_response = api.submit_prediction(company, prediction)
         
-        print(f'Stock: {company} Update reponse: {update_response.status_code} Create response: {create_response.status_code}')
+        print(f'Stock: {company} Update reponse: {update_response.status_code} Create response: ')
 
     return
 

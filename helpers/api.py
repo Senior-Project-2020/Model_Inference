@@ -14,6 +14,7 @@ class API():
                 headers={'Authorization': self._token}
             ).json()
         )
+        print(self._price_list)
 
     def submit_prediction(self, ticker_symbol, prediction_value):
         endpoint = 'stock-price/'
@@ -35,8 +36,10 @@ class API():
             yesterday_id = self._price_list[
                 (self._price_list.stock == ticker_symbol) & \
                 (self._price_list.date == str(self._date - timedelta(days=1)))
-            ].loc[0, 'id']
+            ].iloc[0]["id"]
+            print(yesterday_id)
         except Exception:
+            print("Here")
             yesterday_id = -1
 
         endpoint = f'stock-price/{yesterday_id}'
