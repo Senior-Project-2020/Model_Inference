@@ -52,9 +52,9 @@ class StockCollection:
                 time.sleep(0.5)
 
         dataframe = pd.DataFrame(history)
-        open_price = dataframe.iloc[-2, 0]
-        high = dataframe.iloc[-2, 1]
-        low = dataframe.iloc[-2, 2]
-        close_price = dataframe.iloc[-2, 3]
-        volume = dataframe.iloc[-2, 4]
+        open_price = dataframe.iloc[-1, 0]
+        high = dataframe.iloc[-1, 1]
+        low = dataframe.iloc[-1, 2]
+        close_price = dataframe.iloc[-1, 3]
+        volume = dataframe.iloc[-1, 4]
         return high, low, open_price, close_price, volume
