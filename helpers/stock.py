@@ -52,6 +52,8 @@ class StockCollection:
                 time.sleep(0.5)
 
         dataframe = pd.DataFrame(history)
+        dataframe = dataframe.dropna()
+
         open_price = dataframe.iloc[-1, 0]
         high = dataframe.iloc[-1, 1]
         low = dataframe.iloc[-1, 2]
